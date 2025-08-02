@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced Sales Report Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-200 p-4">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-2xl">
+    <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Advanced Sales Report Form</h2>
+
+    <form id="salesForm" novalidate>
+      <fieldset class="border-2 border-gray-300 p-4 rounded-xl mb-6">
+        <legend class="fieldset-legend">Employee and Booking Details</legend>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="field-container">
+            <label class="block font-medium">Booking Type <span class="text-red-500">*</span></label>
+            <select name="bookingType" id="bookingType" class="form-field">
+              <option value="NEW">New</option>
+              <option value="Reissue">Reissue</option>
+              <option value="Refund">Refund</option>
+              <option value="INSTALLMENT">Installment</option>
+            </select>
+          </div>
+          <div class="field-container" id="dateField">
+            <label class="block font-medium">Date <span class="text-red-500">*</span></label>
+            <input type="date" name="date" class="form-field" required>
+          </div>
+          <div class="field-container" id="agentNameField">
+            <label for="agentName" class="block font-medium">Agent Name <span class="text-red-500">*</span></label>
+            <select id="agentName" name="agentName" class="form-field" required>
+              <option value="" selected disabled>Select Agent</option>
+            </select>
+          </div>
+          <div class="field-container" id="regionField">
+            <label class="block font-medium">Region <span class="text-red-500">*</span></label>
+            <select name="region" id="region" class="form-field" required>
+              <option>Kuwait</option>
+              <option>Ksa</option>
+              <option>Uae</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+      
+      <fieldset class="border-2 border-gray-300 p-4 rounded-xl mb-6 hidden-section" id="htlPnrOnlyFieldset">
+        <legend class="fieldset-legend">Booking Reference</legend>
+        <div class="field-container">
+          <label for="htlPnr" class="block font-medium">Htl / Pnr <span class="text-red-500">*</span></label>
+          <input type="text" name="htlPnr" id="htlPnr" class="form-field" required>
+        </div>
+      </fieldset>
+
+      <div id="bookingDetailsContainer">
+        <fieldset class="border-2 border-gray-300 p-4 rounded-xl mb-6" id="customerDetails">
+          <legend class="fieldset-legend">Customer Details</legend>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="field-container">
+              <label for="cstName" class="block font-medium">Customer Name <span class="text-red-500">*</span></label>
+              <input type="text" name="cstName" id="cstName" class="form-field" required>
+            </div>
+            <div class="field-container">
+              <label for="cstNationality" class="block font-medium">Customer Nationality <span class="text-red-500">*</span></label>
+              <input type="text" name="cstNationality" id="cstNationality" class="form-field" required>
+            </div>
+            <div class="field-container">
+              <label for="cstMob" class="block font-medium">Customer Mobile Number <span class="text-red-500">*</span></label>
+              <input type="tel" name="cstMob" id="cstMob" class="form-field" required>
+            </div>
+            <div class="field-container">
+              <label for="source" class="block font-medium">Source <span class="text-red-500">*</span></label>
+              <select name="source" id="source" class="form-field" required>
+                <option>Call</option> <option>Css</option> <option>Old data</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="border-2 border-gray-300 p-4 rounded-xl mb-6" id="serviceDetails">
+          <legend class="fieldset-legend">Service Details</legend>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="field-container">
+              <label for="service" class="block font-medium">Service <span class="text-red-500">*</span></label>
+              <select id="service" name="service" class="form-field" required>
+                <option value="" disabled selected hidden>Select Service</option>
+                <option value="flight">Flight</option> <option value="hotel">Hotel</option> <option value="umrah">Umrah</option> <option value="transfer">Transfer</option> <option value="tours">Tours</option> <option value="rixos">Rixos</option> <option value="Cruise">Cruise</option> <option value="visa">Visa</option>
+              </select>
+            </div>
+            <div id="rixosRoomsDiv" class="field-container hidden-section">
+              <label for="rixosRooms" class="block font-medium">Number of Rixos Rooms <span class="text-red-500">*</span></label>
+              <input type="number" id="rixosRooms" name="rixosRooms" class="form-field" min="1" placeholder="Enter number of rooms">
+            </div>
+             <div class="field-container">
+              <label for="provider" class="block font-medium">Provider <span class="text-red-500">*</span></label>
+              <select name="provider" id="provider" class="form-field" required>
+                <option>Gds</option> <option>Smile</option> <option>Tds</option> <option>Rixos</option>
+              </select>
+            </div>
+            <div class="field-container">
+              <label for="destination" class="block font-medium">Destination <span class="text-red-500">*</span></label>
+              <input type="text" name="destination" id="destination" class="form-field" required>
+            </div>
+            <div class="field-container">
+              <label for="paxNumber" class="block font-medium">Pax Number <span class="text-red-500">*</span></label>
+              <input type="number" name="paxNumber" id="paxNumber" class="form-field" required min="1">
+            </div>
+           <div class="field-container">
+              <label for="bookingRef" class="block font-medium">Booking Ref <span class="text-red-500">*</span></label>
+              <input type="text" name="bookingRef" id="bookingRef" class="form-field" required>
+            </div>
+          </div>
+        </fieldset>
+        
+        <fieldset class="border-2 border-gray-300 p-4 rounded-xl mb-6" id="financialDetails">
+           <legend class="fieldset-legend">Financial Details</legend>
+           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+               <div class="field-container">
+                   <label class="block font-medium">Currency <span class="text-red-500">*</span></label>
+                   <select name="currency" id="currency" class="form-field" required>
+                       <option value="SAR">Sar</option>
+                       <option value="KWD">Kwd</option>
+                       <option value="AED">Aed</option>
+                   </select>
+               </div>
+               <div></div>
+
+               <div id="totalSellingRateField" class="field-container hidden-section">
+                   <label class="block font-medium">Total Selling Rate</label>
+                   <div class="flex items-center"><input type="number" id="totalSellingRateInput" class="form-field" disabled><span class="currency-symbol"></span></div>
+               </div>
+               <div id="remainingAmountPrevField" class="field-container hidden-section">
+                   <label class="block font-medium">Previous Remaining Amount</label>
+                   <div class="flex items-center"><input type="number" id="remainingAmountPrevInput" class="form-field" disabled><span class="currency-symbol"></span></div>
+               </div>
+           
+               <div id="netRateField" class="field-container">
+                   <label class="block font-medium">Net Rate <span class="text-red-500">*</span></label>
+                    <div class="flex items-center"><input type="number" name="netRate" id="netRateInput" step="0.01" class="form-field" required><span class="currency-symbol"></span></div>
+               </div>
+               <div id="sellingRateField" class="field-container">
+                   <label class="block font-medium">Selling Rate <span class="text-red-500">*</span></label>
+                   <div class="flex items-center"><input type="number" name="sellingRate" id="sellingRateInput" step="0.01" class="form-field" required><span class="currency-symbol"></span></div>
+               </div>
+
+               <div class="field-container">
+                   <label class="block font-medium">Payment Method <span class="text-red-500">*</span></label>
+                   <select name="paymentMethod" id="paymentMethod" class="form-field" required>
+                       <option value="" selected disabled hidden>Select</option>
+                       <option value="link">Payment Link</option>
+                       <option value="bank">Bank Transfer</option>
+                   </select>
+               </div>
+               <div id="linkInput" class="field-container hidden-section">
+                   <label class="block font-medium">Enter Payment Link <span class="text-red-500">*</span></label>
+                   <input type="url" name="paymentLinkURL" class="form-field" placeholder="https://example.com" />
+               </div>
+               <div id="bankInput" class="field-container hidden-section">
+                   <label class="block font-medium">Upload Bank Transfer File <span class="text-red-500">*</span></label>
+                   <input type="file" name="bankFile" id="bankFile" class="form-field" accept="image/*,.pdf" />
+                   <small class="text-gray-600 mt-1 block">Files will be converted to Base64</small>
+               </div>
+               
+               <div id="installmentToggleField" class="field-container">
+                   <label for="installment" class="block font-medium">Is it an installment? <span class="text-red-500">*</span></label>
+                   <select id="installment" name="installment" class="form-field" required>
+                       <option value="no" selected>No</option>
+                       <option value="yes">Yes</option>
+                   </select>
+               </div>
+           
+               <div id="installmentContentNewBooking" class="field-container hidden-section md:col-span-2 mt-4 bg-gray-50">
+                   <h3 class="text-blue-700 text-lg font-semibold border-b pb-1 mb-3">First Payment Details</h3>
+                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                       <div>
+                           <label for="amountPaidNewBookingInput" class="block font-medium">Amount Paid <span class="text-red-500">*</span></label>
+                           <div class="flex items-center"><input type="number" id="amountPaidNewBookingInput" name="amountPaidNewBooking" class="form-field" required step="0.01"><span class="currency-symbol"></span></div>
+                       </div>
+                       <div>
+                           <label for="remainingAmountNewBookingInput" class="block font-medium">Remaining Amount</label>
+                           <div class="flex items-center"><input type="number" id="remainingAmountNewBookingInput" name="remainingAmountNewBooking" class="form-field" readonly><span class="currency-symbol"></span></div>
+                       </div>
+                   </div>
+               </div>
+
+               <div id="installmentPaymentContent" class="field-container hidden-section md:col-span-2 mt-4 bg-gray-50">
+                   <h3 class="text-blue-700 text-lg font-semibold border-b pb-1 mb-3">Installment Payment Details</h3>
+                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                       <div>
+                           <label for="amountPaidInput" class="block font-medium">Amount Paid Now <span class="text-red-500">*</span></label>
+                          <div class="flex items-center"><input type="number" id="amountPaidInput" name="amountPaid" class="form-field" required step="0.01"><span class="currency-symbol"></span></div>
+                       </div>
+                       <div>
+                           <label for="newRemainingAmountInput" class="block font-medium">New Remaining Amount</label>
+                          <div class="flex items-center"><input type="number" id="newRemainingAmountInput" name="newRemainingAmount" class="form-field" readonly><span class="currency-symbol"></span></div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+        </fieldset>
+
+        <fieldset class="border-2 border-gray-300 p-4 rounded-xl mb-6" id="remarksUploads">
+          <legend class="fieldset-legend">Notes and Attachments</legend>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="md:col-span-2 field-container">
+              <label class="block font-medium">Remarks</label>
+              <textarea name="remarks" class="form-field" id="remarks" rows="3"></textarea>
+            </div>
+            <div class="field-container">
+              <label class="block font-medium">Voucher <span class="text-red-500">*</span></label>
+              <input type="file" name="voucher" id="voucher" multiple class="form-field" accept="image/*,.pdf" required>
+              <small class="text-gray-600 mt-1 block">Files will be converted to Base64</small>
+            </div>
+            <div class="field-container">
+              <label class="block font-medium">Invoice <span class="text-red-500">*</span></label>
+              <input type="file" name="invoice" id="invoice" multiple class="form-field" accept="image/*,.pdf" required>
+              <small class="text-gray-600 mt-1 block">Files will be converted to Base64</small>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div id="form-messages" class="mt-6 text-center"></div>
+      <div class="mt-6 text-center">
+        <button type="submit" id="submitButton" class="bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center mx-auto disabled:bg-gray-400 disabled:cursor-wait font-bold text-lg">
+          <span id="submitButtonText">Submit</span>
+          <svg id="spinnerIcon" class="animate-spin ml-3 h-5 w-5 text-white hidden-section" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
