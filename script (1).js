@@ -1,7 +1,7 @@
 // Advanced Sales Form Script
 document.addEventListener('DOMContentLoaded', () => {
     // --- CONFIGURATION ---
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyD7R5IvBi1bzTJ1KU5-I-f_vz-rHx79vw3UVFejGkTZKiqnjyRs0VeVgAKI9wdaGki/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLSJS26JEwbmuDOcvwaN1nTawevdltNl9Pup7uHAgUdSQU81eCCUpQIwepHDlnSKdR/exec';
     const LOCAL_STORAGE_KEY = 'salesFormData';
 
     // --- DOM ELEMENTS ---
